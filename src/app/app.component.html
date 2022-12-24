@@ -1,0 +1,32 @@
+<div class="conatiner">
+  <h1>Angular Task</h1>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor=" let user of users | paginate: { itemsPerPage: 1,currentPage: p, totalItems:total }">
+      <td>{{ user.id }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+      <button class="btn btn-danger" style="margin-bottom: 5px;" (click)="OnDeleteuser(user.id)">Delete</button>
+
+
+    </tr>
+  </table>
+  <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+</div>
+<form #usersForm="ngForm" (ngSubmit)="getUserData(usersForm.value)">
+  <input type="text" ngModel name="email" placeholder="Enter Email ">
+  <br/><br/>
+  <input type="text" ngModel name="fname" placeholder="Enter First name">
+  <br/><br/>
+  <input type="text" ngModel name="lname" placeholder="Enter last name">
+  <br/><br/>
+  <button class="btn btn-primary">ADD</button>       
+  <button class="btn btn-primary" style="margin: 10px;" (click)="updateuser(users.id)" >UPDATE</button>
+</form>
